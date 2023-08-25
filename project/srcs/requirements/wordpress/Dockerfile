@@ -39,5 +39,5 @@ COPY ./requirements/wordpress/tools/install.sh .
 RUN chmod +x install.sh && \
     sed -i "s|wordpress_admin_user_here|$DB_USER|g" install.sh && \
     sed -i "s|wordpress_admin_password_here|$DB_PASS|g" install.sh
-CMD ["/usr/sbin/php-fpm81", "-F"]
+CMD ["sh", "-c", "./install.sh && /usr/sbin/php-fpm81 -F"]
 
