@@ -35,9 +35,9 @@ RUN wget https://wordpress.org/latest.zip && \
 COPY ./requirements/wordpress/conf/wp-config-create.sh .
 RUN sh wp-config-create.sh && rm wp-config-create.sh && \
     chmod -R 0777 wp-content/
-COPY ./requirements/wordpress/tools/install.sh .
-RUN chmod +x install.sh && \
-    sed -i "s|wordpress_admin_user_here|$DB_USER|g" install.sh && \
-    sed -i "s|wordpress_admin_password_here|$DB_PASS|g" install.sh
+COPY ./requirements/wordpress/tools/install.sh /var/www/
+RUN chmod +x /var/www/install.sh && \
+    sed -i "s|wordpress_admin_user_here|$DB_USER|g" /var/www/install.sh && \
+    sed -i "s|wordpress_admin_password_here|$DB_PASS|g" /var/www/install.sh
 CMD ["sh", "-c", "/var/www/install.sh && /usr/sbin/php-fpm81 -F"]
 
