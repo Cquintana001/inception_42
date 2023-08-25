@@ -32,12 +32,12 @@ RUN wget https://wordpress.org/latest.zip && \
     unzip latest.zip && \
     cp -rf wordpress/* . && \
     rm -rf wordpress latest.zip
-COPY ./requirements/wordpress/conf/wp-config-create.sh .
+COPY requirements/wordpress/conf/wp-config-create.sh .
 RUN sh wp-config-create.sh && rm wp-config-create.sh && \
     chmod -R 0777 wp-content/
-COPY ./requirements/wordpress/conf/install.sh /var/www/
-RUN chmod +x /var/www/install.sh && \
-    sed -i "s|wordpress_admin_user_here|$DB_USER|g" /var/www/install.sh && \
-    sed -i "s|wordpress_admin_password_here|$DB_PASS|g" /var/www/install.sh
-CMD ["sh", "-c", "/var/www/install.sh && /usr/sbin/php-fpm81 -F"]
+COPY requirements/wordpress/conf/install.sh /usr/local/bin/install.sh
+RUN chmod +x /usr/local/bin/install.sh && \
+    sed -i "s|wordpress_admin_user_here|$DB_USER|g" /usr/local/bin/install.sh && \
+    sed -i "s|wordpress_admin_password_here|$DB_PASS|g" /usr/local/bin/install.sh
+CMD ["sh", "-c", "install.sh && /usr/sbin/php-fpm81 -F"]
 
