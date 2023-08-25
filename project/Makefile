@@ -27,11 +27,14 @@ clean: down
 fclean:
 	@printf "Total clean of all configurations docker\n"
 	if [ -n "$$(docker ps -qa)" ]; then docker stop $$(docker ps -qa); fi
+	if [ -n "$$(docker ps -qa)" ]; then docker rm $$(docker ps -qa) -f; fi
+	if [ -n "$$(docker images -q)" ]; then docker rmi $$(docker images -q) -f; fi
 	if [ -n "$$(docker volume ls -q)" ]; then docker volume rm $$(docker volume ls -q); fi
 	@docker system prune --all --force --volumes
 	@docker network prune --force
 	@docker volume prune --force
 	@sudo rm -rf ~/data/wordpress/*
 	@sudo rm -rf ~/data/mariadb/*
+
 
 .PHONY	: all build down re clean fclean
