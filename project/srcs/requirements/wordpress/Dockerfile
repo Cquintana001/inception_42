@@ -33,7 +33,7 @@ RUN wget https://wordpress.org/latest.zip && \
     rm -rf latest.zip
 COPY requirements/wordpress/conf/wp-config-create.sh .
 RUN sh wp-config-create.sh && rm wp-config-create.sh && \
-    chmod -R 0777 wp-content/
+    chmod -R 0777 wordpress/wp-content/
 COPY requirements/wordpress/conf/install.sh /usr/local/bin/install.sh
 RUN chmod +x /usr/local/bin/install.sh && \
     sed -i "s|wordpress_admin_user_here|$DB_USER|g" /usr/local/bin/install.sh && \
