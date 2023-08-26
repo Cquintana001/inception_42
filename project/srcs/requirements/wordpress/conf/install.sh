@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wp core install --path=/var/www --url=caquinta.42.fr \
+wp core install --path=/var/www/wordpress --url=caquinta.42.fr \
     --title="42 inception" \
     --admin_name=wordpress_admin_user_here \
     --admin_user=wordpress_admin_user_here \

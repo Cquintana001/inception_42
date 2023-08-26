@@ -30,8 +30,7 @@ WORKDIR /var/www
 EXPOSE 9000
 RUN wget https://wordpress.org/latest.zip && \
     unzip latest.zip && \
-    cp -rf wordpress/* . && \
-    rm -rf wordpress latest.zip
+    rm -rf latest.zip
 COPY requirements/wordpress/conf/wp-config-create.sh .
 RUN sh wp-config-create.sh && rm wp-config-create.sh && \
     chmod -R 0777 wp-content/
