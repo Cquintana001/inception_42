@@ -28,6 +28,8 @@ RUN apk update && apk upgrade && apk add --no-cache \
     rm -f /var/cache/apk/*
 WORKDIR /var/www
 EXPOSE 9000
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
+RUN chmod +x /usr/local/bin/wp
 RUN wget https://wordpress.org/latest.zip && \
     unzip latest.zip && \
     rm -rf latest.zip
